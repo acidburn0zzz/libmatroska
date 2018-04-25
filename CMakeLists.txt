@@ -62,9 +62,15 @@ set (libmatroska_C_PUBLIC_HEADERS
 
 add_library(matroska ${libmatroska_SOURCES} ${limatroska_PUBLIC_HEADERS} ${libmatroska_C_PUBLIC_HEADERS})
 target_link_libraries(matroska PUBLIC ebml)
-set_target_properties(matroska PROPERTIES
-  VERSION 6.0.0
-  SOVERSION 6)
+if(APPLE)
+  set_target_properties(matroska PROPERTIES
+    VERSION 7.0.0
+    SOVERSION 7)
+else()
+  set_target_properties(matroska PROPERTIES
+    VERSION 6.0.0
+    SOVERSION 6)
+endif()
 target_include_directories(matroska PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
