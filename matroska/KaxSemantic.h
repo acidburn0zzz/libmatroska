@@ -591,6 +591,15 @@ DECLARE_MKX_UINTEGER(KaxContentEncodingType)
 DECLARE_MKX_MASTER(KaxContentCompression)
 };
 
+#if MATROSKA_VERSION >= 2
+DECLARE_MKX_MASTER(KaxContentEncAESSettings)
+};
+#endif
+
+#if MATROSKA_VERSION >= 2
+DECLARE_MKX_UINTEGER(KaxAESSettingsCipherMode)
+};
+#endif
 
 DECLARE_MKX_UINTEGER(KaxContentCompAlgo)
 };

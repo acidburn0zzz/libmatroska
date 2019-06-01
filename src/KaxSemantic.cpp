@@ -549,6 +549,9 @@ DEFINE_MKX_BINARY (KaxContentCompSettings, 0x4255, 2, KaxContentCompression, "Co
 DEFINE_START_SEMANTIC(KaxContentEncryption)
 DEFINE_SEMANTIC_ITEM(false, true, KaxContentEncAlgo)
 DEFINE_SEMANTIC_ITEM(false, true, KaxContentEncKeyID)
+#if MATROSKA_VERSION >= 2
+DEFINE_SEMANTIC_ITEM(false, true, KaxContentEncAESSettings)
+#endif // MATROSKA_VERSION
 DEFINE_SEMANTIC_ITEM(false, true, KaxContentSignature)
 DEFINE_SEMANTIC_ITEM(false, true, KaxContentSigKeyID)
 DEFINE_SEMANTIC_ITEM(false, true, KaxContentSigAlgo)
@@ -556,6 +559,14 @@ DEFINE_SEMANTIC_ITEM(false, true, KaxContentSigHashAlgo)
 DEFINE_END_SEMANTIC(KaxContentEncryption)
 
 DEFINE_MKX_MASTER(KaxContentEncryption, 0x5035, 2, KaxContentEncoding, "ContentEncryption")
+#if MATROSKA_VERSION >= 2
+DEFINE_START_SEMANTIC(KaxContentEncAESSettings)
+DEFINE_SEMANTIC_ITEM(true, true, KaxAESSettingsCipherMode)
+DEFINE_END_SEMANTIC(KaxContentEncAESSettings)
+
+DEFINE_MKX_MASTER(KaxContentEncAESSettings, 0x47E7, 2, KaxContentEncryption, "ContentEncAESSettings")
+DEFINE_MKX_UINTEGER(KaxAESSettingsCipherMode, 0x47E8, 2, KaxContentEncAESSettings, "AESSettingsCipherMode")
+#endif
 DEFINE_MKX_UINTEGER_DEF(KaxContentEncAlgo, 0x47E1, 2, KaxContentEncryption, "ContentEncAlgo", 0)
 DEFINE_MKX_BINARY (KaxContentEncKeyID, 0x47E2, 2, KaxContentEncryption, "ContentEncKeyID")
 DEFINE_MKX_BINARY (KaxContentSignature, 0x47E3, 2, KaxContentEncryption, "ContentSignature")
